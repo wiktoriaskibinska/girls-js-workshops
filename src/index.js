@@ -1,4 +1,6 @@
 let currentNumber = 1;
+let playing = false;
+let intervalID = "";
 document.querySelector("#slide" + currentNumber).classList.add("show");
 document.querySelector("#pin" + currentNumber).classList.add("selected");
 
@@ -42,4 +44,24 @@ for (let numerPinu = 1; numerPinu <= 5; numerPinu++) {
     showSlide(numerPinu);
   });
 }
-///
+/// slideshow
+function playButtonClicked() {
+  if (playing === true) {
+    stopSlideshow();
+  } else {
+    startSlideshow();
+  }
+}
+document.querySelector("#play").addEventListener("click", playButtonClicked);
+
+function startSlideshow() {
+  document.querySelector("#play").classList.add("on");
+  playing = true;
+  intervalID = setInterval(handleNext, 1500);
+}
+
+function stopSlideshow() {
+  document.querySelector("#play").classList.remove("on");
+  playing = false;
+  clearInterval(intervalID);
+}
